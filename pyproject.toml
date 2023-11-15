@@ -22,7 +22,7 @@ push = false
 "pyproject.toml" = [
     'current_version = "{version}"',
 ]
-"src/Simple-Track-Builder/__init__.py" = [
+"src/simple_track_builder/__init__.py" = [
     '__version__ = "{version}"',
 ]
 "setup.cfg" = [
