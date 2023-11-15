@@ -14,14 +14,85 @@ A very simple cell tracker from labeled images
 
 You can install `Simple-Track-Builder` via [pip]:
 
-    pip install Simple-Track-Builder
-
-
+```shell
+pip install Simple-Track-Builder
+```
 
 To install latest development version :
 
-    pip install git+https://github.com/GuignardLab/Simple-Track-Builder.git
+```shell
+pip install git+https://github.com/GuignardLab/Simple-Track-Builder.git
+```
 
+## Usage
+
+Once installed, Simple-Track-Builder can be used multiple ways.
+
+### Command line call
+
+Simple-Track-Builder can be called in the terminal the following way:
+
+```shell
+simple-track-builder --pathes p1.tiff p2.tiff [...] --output out_test.lT
+```
+
+where `p1.tiff`, `p2.tiff`, ... are the pathes to all the images to use in temporal order, from start to finish.
+
+Instead of informing all the pathes manually, one can inform the path format, the starting and ending times:
+
+```shell
+simple-track-builder --path-format p{t:d}.tiff --start-time 0 --end-time 10 --output out_test.lT
+```
+
+If necessary, the background can be informed using the `--background` parameter.
+
+Finally, a help for `simple-track-builder` can be called the following way:
+
+```shell
+simple-track-builder --help
+```
+
+### Python
+
+Simple-Track-Builder can be called in Python 2 different ways:
+
+#### Direct function
+
+```python
+from simple_track_builder import build_tracks
+
+pathes = ["p1.tiff", "p2.tiff", ...]
+out = "test.lT"
+build_track(label_image_list=pathes, background=0, out=out)
+```
+
+`label_image_list` can also take `np.ndarray`s:
+
+```python
+from simple_track_builder import build_tracks
+from tifffile import imread
+pathes = [imread("p1.tiff"), imread("p2.tiff"), ...]
+out = "test.lT"
+build_track(label_image_list=pathes, background=0, out=out)
+```
+
+That can be usefull when you are running tests and do not want to reload the images each time.
+
+#### Class
+
+For the most modularity, one can use the class itself:
+
+```python
+from simple_track_builder import SimpleTrackBuilder
+pathes = ["p1.tiff", "p2.tiff", ...]
+
+lT = SimpleTrackBuilder(pathes, background=0)
+lT.build_lineages()
+
+lT.write("out.lT")
+```
+
+`lT` is a `LineageTree` instance that has all their properties (see [there](https://github.com/leoguignard/LineageTree))
 
 ## Contributing
 
@@ -41,20 +112,11 @@ If you encounter any problems, please [file an issue] along with a detailed desc
 
 This library was generated using [Cookiecutter] and a custom made template based on [@napari]'s [cookiecutter-napari-plugin] template.
 
-
-[napari]: https://github.com/napari/napari
 [Cookiecutter]: https://github.com/audreyr/cookiecutter
 [@napari]: https://github.com/napari
 [MIT]: http://opensource.org/licenses/MIT
-[BSD-3]: http://opensource.org/licenses/BSD-3-Clause
-[GNU GPL v3.0]: http://www.gnu.org/licenses/gpl-3.0.txt
-[GNU LGPL v3.0]: http://www.gnu.org/licenses/lgpl-3.0.txt
-[Apache Software License 2.0]: http://www.apache.org/licenses/LICENSE-2.0
-[Mozilla Public License 2.0]: https://www.mozilla.org/media/MPL/2.0/index.txt
 [cookiecutter-napari-plugin]: https://github.com/napari/cookiecutter-napari-plugin
 [pip]: https://pypi.org/project/pip/
-[PyPI]: https://pypi.org/
 [tox]: https://tox.readthedocs.io/en/latest/
 
 [file an issue]: https://github.com/GuignardLab/Simple-Track-Builder/issues
-
