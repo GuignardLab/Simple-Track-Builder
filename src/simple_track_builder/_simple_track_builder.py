@@ -113,9 +113,9 @@ def script_run():
         prog="build-lineage-tree",
         description=(
             "Build a lineage tree from label images."
-            "  /!\ Either pathes or path-format has to be informed."
+            " !!! Either pathes or path-format has to be informed."
             " If path-format is informed then start-time AND end-time"
-            " have to be informed too. /!\\"
+            " have to be informed too. !!!"
         ),
     )
     parser.add_argument(
