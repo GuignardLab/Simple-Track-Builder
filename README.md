@@ -118,5 +118,4 @@ This library was generated using [Cookiecutter] and a custom made template based
 [cookiecutter-napari-plugin]: https://github.com/napari/cookiecutter-napari-plugin
 [pip]: https://pypi.org/project/pip/
 [tox]: https://tox.readthedocs.io/en/latest/
-
 [file an issue]: https://github.com/GuignardLab/Simple-Track-Builder/issues
